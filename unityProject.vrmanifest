@@ -1,0 +1,16 @@
+{
+  "source": "Unity",
+  "applications": [
+    {
+      "app_key": "application.generated.unity.utmrowingsimulator.exe",
+      "launch_type": "url",
+      "url": "steam://launch/",
+      "action_manifest_path": "C:\\Users\\ASUS\\Desktop\\FYP\\UTM Rowing Simulator (1)\\UTM Rowing Simulator\\Assets\\StreamingAssets\\SteamVR\\actions.json",
+      "strings": {
+        "en_us": {
+          "name": "UTM Rowing Simulator [Testing]"
+        }
+      }
+    }
+  ]
+}

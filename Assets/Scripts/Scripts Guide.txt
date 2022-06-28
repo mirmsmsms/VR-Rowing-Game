@@ -1,0 +1,76 @@
+
+
+
+///Player///
+
+Scull
+- Manage physics, appearance & control for the scull
+- Reference for scull related scripts
+
+ScullControl
+- Get input data either from mouse or serial and convert to paddle movement
+
+ScullSorter
+- Control the apperance of the scull depending on current settings
+
+ScullRower
+- Reference for each rower parts
+
+IKControl
+- Inverse kinematics animation for rower avatar
+
+///Environment///
+
+///Data///
+
+Data
+- References for shared variables
+
+Save
+- Save file object
+- Format:
+	velocity					velocity when reaching finish line
+	velocityMax				maximum acheved velocity
+	velocityAvg				average velocity
+	distance					distance travelled in meters (not accurate)
+	rowCount				number of row counts from start to finish line
+	rowTimeStamps		arraylist of time for each rows
+	rowAngleStamps	arraylist of max angle for each rows
+	timeTotal					time of activity in seconds
+
+Observer
+- Calculate velocity, time & distance for scull
+- Records scull rowing timestamps
+
+Observer Graph
+- Plots graph base on observer's data
+
+Observer File
+- Lists, loads & save observer data
+
+SessionControl
+- Scene management for main session
+
+///View///
+
+View
+- Control CineMachine between 1st person view & 3rd person view
+
+///Control///
+
+InputAccelerometer
+- Sends ScullControl input from serial
+
+UIRadial
+- Handles selection of UI buttons based on mouse or serial input
+
+///Events///
+
+EffectManager
+- Listens to EffectTriggers to create visual effects (splash)
+
+EffectTrigger
+- Invoke EffectManager when triggered by selected rigidbody
+
+EventTrigger
+- Invoke set of events when triggered by selected rigidbody

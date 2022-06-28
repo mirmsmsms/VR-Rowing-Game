@@ -38,16 +38,20 @@ public class Player : MonoBehaviour
     public TextMeshProUGUI playername;
     public TextMeshProUGUI playername2;
     public TextMeshProUGUI toexit;
+    public GameObject before;
+    public GameObject after;
     public GameObject dismarkers;
     public GameObject penguins;
     public GameObject a;
     public GameObject b;
     public ParticleSystem finished;
+    public AudioSource whistle;
     private bool start = false;
-    public float startS = 5f;
+    public float startS = 4f;
     private int score;
     private float perfMultiplier = 1;
     private float timeleft = 10f;
+    private bool justonce = true;
 
     private void Start()
     {
@@ -61,9 +65,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        startS -= (int)Math.Ceiling((double)Time.deltaTime);
-        starttimer.SetText(startS.ToString());
-        StartCoroutine(timer());
+
         if (start)
         {
             if (hp >= 0.0)
@@ -103,6 +105,17 @@ public class Player : MonoBehaviour
             {
                 c.a += 0.1f * Time.deltaTime;
                 fog.SetColor("_TintColor", c);
+            }
+        }
+        else
+        {
+            startS -= Time.deltaTime;
+            if (startS > 0) starttimer.SetText(((int)startS).ToString());
+            if (justonce)
+            {
+
+                StartCoroutine(timer());
+                justonce = false;
             }
         }
 
@@ -154,6 +167,7 @@ public class Player : MonoBehaviour
             if (perf == 1 || perf == 2)
             {
                 other.transform.GetChild(2).gameObject.SetActive(true);
+                other.transform.GetChild(2).GetComponent<AudioSource>().Play();
                 perfMultiplier += 0.5f;
                 if (perf == 2)
                 {
@@ -190,7 +204,7 @@ public class Player : MonoBehaviour
             perf = 0;
             st.GetChild(1).GetChild(0).gameObject.SetActive(true);
         }
-        else if ((d / s) > 2 && (d / s) < 3)
+        else if ((d / s) >= 2 && (d / s) <= 3)
         {
             perf = 1;
             st.GetChild(1).GetChild(1).gameObject.SetActive(true);
@@ -208,11 +222,21 @@ public class Player : MonoBehaviour
 
     private IEnumerator timer()
     {
-        yield return new WaitForSeconds(startS);
+        yield return new WaitForSeconds(4f);
         start = true;
+        whistle.Play();
         starttimer.SetText("GO!");
+        StartCoroutine(go());
     }
 
+    private IEnumerator go()
+    {
+        yield return new WaitForSeconds(1f);
+        before.SetActive(false);
+        after.SetActive(true);
+        Debug.Log("whistling");
+
+    }
     private IEnumerator countdowntoexit()
     {
 
